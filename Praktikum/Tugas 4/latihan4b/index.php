@@ -6,8 +6,10 @@ require 'php/functions.php';
 //Memilih Database
 
 //Melakukan query dari database
-$thrift_shop = query ("SELECT * FROM thrift_shop")
+$thrift_shop = query("SELECT * FROM thrift_shop")
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,18 +38,18 @@ $thrift_shop = query ("SELECT * FROM thrift_shop")
     <div class="table">
         <table border="1" cellspacing="0" cellpadding="30">
             <tr>
-                <th>No</th>
-                <th>Picture</th>
-                <th>Nama</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Category</th>
+            <th>No</th>
+            <th>Picture</th>
+            <th>Nama</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
             </tr>
             <?php $i = 1 ?>
             <?php foreach($thrift_shop as $ts) : ?> 
                     <tr>
                         <td><?=$i ?></td>
-                        <td><img src="asset/img/<?= $ts["picture"]; ?>"></td>
+                        <td><img src="assets/img/<?= $ts["picture"]; ?>"></td>
                         <td><?= $ts["nama"] ?></td>
                         <td><?= $ts["description"] ?></td>
                         <td><?= $ts["price"] ?></td>
@@ -55,6 +57,7 @@ $thrift_shop = query ("SELECT * FROM thrift_shop")
                     </tr>
                 <?php $i++; ?>
             <?php endforeach; ?>
+
         </table>
     </div>
 </body>
