@@ -2,8 +2,18 @@
 // menghubungkan dengan file php lainnya
 require 'functions.php';
 
-// melakukan query
-$thrift_shop = query("SELECT * FROM thrift_shop");
+if (isset($_GET['cari'])) {
+    $keyword = $_GET['keyword'];
+    $thrift_shop = query("SELECT * FROM thrift_shop WHERE
+                picture LIKE '%$keyword%' OR
+                nama LIKE '%$keyword%' OR
+                description LIKE'%$keyword%' OR
+                price LIKE '%$keyword%' OR
+                category LIKE '%$keyword%' ");
+} else {
+    $thrift_shop = query("SELECT * FROM thrift_shop");
+}
+
 
 ?>
 
@@ -35,6 +45,10 @@ $thrift_shop = query("SELECT * FROM thrift_shop");
 <div class="add">
         <a href="tambah.php"><button>Tambah data</button></a>
         </div>
+        <form action="" method="get">
+            <input type="text" name="keyword">
+            <button type="submit" name="cari">Cari</button>
+        </form>
     <table border="1" cellspacing="0" cellpadding="30">
         <tr>
             <th>No</th>
@@ -45,7 +59,13 @@ $thrift_shop = query("SELECT * FROM thrift_shop");
             <th>Price</th>
             <th>Category</th>
         </tr>
-
+        <?php if (empty($thrift_shop)) : ?>
+            <tr>
+                <td colspan="7">
+                    <h1>Data tidak ditemukan</h1>
+                </td>
+            </tr>
+        <?php else : ?>
         <?php $i =1; ?>
         <?php foreach ($thrift_shop as $ts) : ?>
             <tr>
@@ -62,6 +82,7 @@ $thrift_shop = query("SELECT * FROM thrift_shop");
             </tr>
             <?php $i++; ?>
         <?php endforeach; ?>
+        <?php endif; ?>
     </table>
 </body>
 </html>
